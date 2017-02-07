@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>A mysql todo list app</title>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+
+<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+	<div class="container" id="main-wrapper">
+		<div class="row">
+			<h1>Welcome back! Your current task listing...</h1>
+			<form class="form-inline" action="/addNew" method="post">
+				<div class="form-group">
+					<label class="sr-only">New Task</label>
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="New Task" name="newTaskString">
+					</div>
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Task Date Deadline" name="newTaskDate">
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary">Add New Task</button>
+			</form>
+		</div>
+
+		<div class="row">
+			<table class="table">
+				<% if (taskArray.length === 0){ %>
+					<tr><td>Your task list is currently empty. Add a task and get busy!</td></tr>
+				<% }else{ %>
+					<% taskArray.map((task, index)=>{ %>
+						<tr>
+							<td><%= task.task_name %></td>
+							<td><%= task.task_date %></td>
+							<td><a href="/edit/<%= task.id %>"><button class="btn btn-warning">Edit</a></td>
+							<td><a href="/delete/<%= task.id %>"><button class="btn btn-danger">Delete</button></a></td>
+						</tr>
+					<% }); %>
+				<% } %>
+			</table>
+		</div>
+
+
+	</div>
+
+</body>
+</html>
